@@ -17,7 +17,7 @@ import os
 n = 0
 
 api_id = 900308
-api_hash = '11111111111111111111111111111'
+api_hash = '#############################'
 
 client = TelegramClient('anon', api_id, api_hash)
 
@@ -46,11 +46,11 @@ class RunChromeTests():
     for mes in messages:
         str_balance = str(mes.message)
         print(str_balance)
-        balance = (str_balance.replace('Available balance: ', '')).replace('', '')
+        balance = (str_balance.replace('Available balance: ', '')).replace(' LTC', '')
         print(balance)
     print("balance")
     client.send_message('LTC Click Bot', "/visit")
-    if balance >= 0.0004:
+    if (float(balance)>=0.0004):
         print('time to export money')
     else:
         print('more farm!')
