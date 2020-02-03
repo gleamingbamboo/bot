@@ -17,7 +17,7 @@ import os
 n = 0
 
 api_id = 900308
-api_hash = '8c1ad58904148b4c726faead7f4b6f04'
+api_hash = '11111111111111111111111111111'
 
 client = TelegramClient('anon', api_id, api_hash)
 
