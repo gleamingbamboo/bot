@@ -9,19 +9,28 @@ import hashlib
 import time
 import re
 from virus_total_apis import PublicApi as VirusTotalPublicApi
-from telethon import TelegramClient
+from telethon import TelegramClient, utils
+from telethon.tl.functions.channels import JoinChannelRequest
 import webbrowser
 import urllib.request
 import os
 
 n = 0
 
-api_id = 900308
-api_hash = '#######################'
+api_id = 975469
+api_hash = '2a01a095afd70f57b33ffa5a0f35603e'
 
-client = TelegramClient('anon', api_id, api_hash)
-
+client = TelegramClient('anon1', api_id, api_hash)
 client.start()
+
+
+
+#################################
+
+me = client.get_entity('me')
+print(utils.get_display_name(me))
+client(JoinChannelRequest('Litecoin_click_bot'))
+#################################
 
 dlgs = client.get_dialogs()
 
@@ -40,6 +49,8 @@ class RunChromeTests():
         driver.close()
         driver.quit()
 
+
+
     client.send_message('LTC Click Bot', "/balance")
     time.sleep(2)
     messages = client.get_messages('Litecoin_click_bot', limit=1)
@@ -51,6 +62,7 @@ class RunChromeTests():
         print('Balance:'+balance+' LTC. Time to export money')
     else:
         print('Balance:'+balance+' LTC. more farm!')
+
 while True:
     msgs = client.get_messages(tegmo, limit=1)
 
