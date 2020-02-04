@@ -18,19 +18,10 @@ import os
 n = 0
 
 api_id = 975469
-api_hash = '2a01a095afd70f57b33ffa5a0f35603e'
+api_hash = '№№№№№№№№№№№№№№№№№№№№№№№№№№№№№'
 
 client = TelegramClient('anon1', api_id, api_hash)
 client.start()
-
-
-
-#################################
-
-me = client.get_entity('me')
-print(utils.get_display_name(me))
-client(JoinChannelRequest('Litecoin_click_bot'))
-#################################
 
 dlgs = client.get_dialogs()
 
@@ -51,13 +42,13 @@ class RunChromeTests():
 
 
 
-    client.send_message('LTC Click Bot', "/balance")
+    client.send_message('Litecoin_click_bot', "/balance")
     time.sleep(2)
     messages = client.get_messages('Litecoin_click_bot', limit=1)
     for mes in messages:
         str_balance = str(mes.message)
         balance = (str_balance.replace('Available balance: ', '')).replace(' LTC', '')
-    client.send_message('LTC Click Bot', "/visit")
+    client.send_message('Litecoin_click_bot', "/visit")
     if (float(balance)>=0.0004):
         print('Balance:'+balance+' LTC. Time to export money')
     else:
@@ -73,7 +64,7 @@ while True:
             timer = (str_response.replace('You must stay on the site for', '')).replace('seconds to get your reward.', '')
             waitin = int(timer)
             print("Ждать придется: ", waitin)
-            client.send_message('LTC Click Bot', "/visit")
+            client.send_message('Litecoin_click_bot', "/visit")
             time.sleep(3)
             msgs2 = client.get_messages(tegmo, limit=1)
             for mes2 in msgs2:
@@ -96,7 +87,7 @@ while True:
                         from telethon.tl.functions.messages import GetBotCallbackAnswerRequest
 
                         resp = client(GetBotCallbackAnswerRequest(
-                            'LTC Click Bot',
+                            'Litecoin_click_bot',
                             message_id,
                             data=button_data
                         ))
@@ -109,7 +100,7 @@ while True:
                     time.sleep(2)
 
         elif re.search(r'\bSorry\b', mes.message):
-            client.send_message('LTC Click Bot', "/visit")
+            client.send_message('Litecoin_click_bot', "/visit")
             time.sleep(6)
             print("Ads not found")
 
@@ -118,7 +109,7 @@ while True:
             time.sleep(5)
             if messages[0].reply_markup != None:
                 url_rec = messages[0].reply_markup.rows[0].buttons[0].url
-                f = open("per10.txt")
+                f = open("per11.txt")
                 fd = f.read()
                 if fd == url_rec:
                     print("Найдено повторение переменной")
@@ -140,7 +131,7 @@ while True:
                     params = {
                         'apikey': '2d090439b3fd029f6b2c28b9f7bc2002e3d0cfd12fe822d358edb3b57e61ad47', 'url': url_rec}
                     response = requests.post(url, data=params)
-                    my_file = open('per10.txt', 'w')
+                    my_file = open('per11.txt', 'w')
                     my_file.write(url_rec)
                     print("Новая запись в файле сделана")
                     time.sleep(16)

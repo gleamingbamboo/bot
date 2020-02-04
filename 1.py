@@ -17,7 +17,7 @@ import os
 n = 0
 
 api_id = 900308
-api_hash = '#######################'
+api_hash = ';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;'
 
 client = TelegramClient('anon', api_id, api_hash)
 
@@ -40,7 +40,7 @@ class RunChromeTests():
         driver.close()
         driver.quit()
 
-    client.send_message('LTC Click Bot', "/balance")
+    client.send_message('Litecoin_click_bot', "/balance")
     time.sleep(2)
     messages = client.get_messages('Litecoin_click_bot', limit=1)
     for mes in messages:
@@ -105,34 +105,38 @@ while True:
             messages = client.get_messages('Litecoin_click_bot')
             time.sleep(5)
             if messages[0].reply_markup != None:
-                url_rec = messages[0].reply_markup.rows[0].buttons[0].url
-                f = open("per10.txt")
-                fd = f.read()
-                if fd == url_rec:
-                    print("Найдено повторение переменной")
-                    msgs2 = client.get_messages(tegmo, limit=1)
-                    for mes2 in msgs2:
-                        button_data = mes2.reply_markup.rows[1].buttons[1].data
-                        message_id = mes2.id
-                        from telethon.tl.functions.messages import GetBotCallbackAnswerRequest
+                # if messages[0].reply_markup.rows[0].buttons[0] != 'KeyboardButton':
+                    # print(messages[0].reply_markup.rows[0].buttons[0])
+                    url_rec = messages[0].reply_markup.rows[0].buttons[0].url
+                    f = open("per10.txt")
+                    fd = f.read()
+                    if fd == url_rec:
+                        print("Найдено повторение переменной")
+                        msgs2 = client.get_messages(tegmo, limit=1)
+                        for mes2 in msgs2:
+                            button_data = mes2.reply_markup.rows[1].buttons[1].data
+                            message_id = mes2.id
+                            from telethon.tl.functions.messages import GetBotCallbackAnswerRequest
 
-                        resp = client(GetBotCallbackAnswerRequest(
-                            tegmo,
-                            message_id,
-                            data=button_data
-                        ))
-                        time.sleep(2)
+                            resp = client(GetBotCallbackAnswerRequest(
+                                tegmo,
+                                message_id,
+                                data=button_data
+                            ))
+                            time.sleep(2)
 
-                else:
-                    url = 'https://www.virustotal.com/vtapi/v2/url/scan'
-                    params = {
-                        'apikey': '2d090439b3fd029f6b2c28b9f7bc2002e3d0cfd12fe822d358edb3b57e61ad47', 'url': url_rec}
-                    response = requests.post(url, data=params)
-                    my_file = open('per10.txt', 'w')
-                    my_file.write(url_rec)
-                    print("Новая запись в файле сделана")
-                    time.sleep(16)
-                    n = n + 1
-                    print("Пройдено циклов: ", n)
+                    else:
+                        url = 'https://www.virustotal.com/vtapi/v2/url/scan'
+                        params = {
+                            'apikey': '2d090439b3fd029f6b2c28b9f7bc2002e3d0cfd12fe822d358edb3b57e61ad47', 'url': url_rec}
+                        response = requests.post(url, data=params)
+                        my_file = open('per10.txt', 'w')
+                        my_file.write(url_rec)
+                        print("Новая запись в файле сделана")
+                        time.sleep(16)
+                        n = n + 1
+                        print("Пройдено циклов: ", n)
+                #else:
+                #     client.send_message('LTC Click Bot', "/visit")
             else:
                 print("Error, None!!!")
